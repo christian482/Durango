@@ -38,9 +38,9 @@ class MenuConversation extends Conversation
       $question = Question::create(Constantes::SELECCIONE_OPCION)
         ->callbackId('ask_institucion')
         ->addButtons([
-            Button::create('Soy IMSS')->value('IMSS'),
-            Button::create('Soy PEMEX')->value('PEMEX'),
-            Button::create('Soy SNTE 29')->value('SNTE29'),
+            Button::create('Soy Trabajador SEP')->value('SEP'),
+            Button::create('Soy Activo IMSS')->value('IMSS'),
+            Button::create('Soy Jubilado o Pensionado')->value('JUBILADO'),
             Button::create('No soy ninguno')->value('Ninguno'),
         ]);
       //$this->say("Para regresar a este menú, escriba la palabra 'menu' en cualquier parte de la conversación");

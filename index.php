@@ -1,5 +1,5 @@
 <?php
-/////////LINK PAGINA ->https://credifintech2020.herokuapp.com/
+/////////LINK PAGINA ->https://credifintechdurango.herokuapp.com/
 ////////////////
 ///////////
 //Este archivo importa todos los drivers necesarios para imoprtarlos con "use"
@@ -72,8 +72,8 @@ $botman->hears('^(?!.*\basesor|ASESOR|Asesor\b).*$', function (BotMan $bot) {
   $incomingMessageText = $bot->getMessage()->getText();
 
   $nombre = $bot->getUser()->getFirstName();
-  $bot -> reply("Mucho gusto  $nombre Soy Villahermosa");
-  $bot -> reply("Credifintech Villahermosa se enfoca en apoyar a todos los trabajadores de SNTE 29, PEMEX e IMSS, ademas Jubilados y Pensionados. Ofreciéndoles crédito de manera rápida y sencilla.");
+  $bot -> reply("Mucho gusto  $nombre");
+  $bot -> reply(Constantes::EXPLICAR_SERVICIO);
   $bot->reply("Para regresar a este menú, escriba la palabra 'menu' en cualquier parte de la conversación");
   $bot -> startConversation(new MenuConversation($nombre));
 });

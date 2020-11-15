@@ -78,15 +78,16 @@ class Constantes {
   const ESCRIBRE_DONDE_TRABAJAS = "Escribe donde trabajas:";
 
 
-  const MENSAJE_SOY_IMSS = "Perfecto, por ser Activo, Jubilado o Pensionado IMSS puede solicitar un crédito personalizado y sin comisiones iniciales.";
-  const MENSAJE_SOY_PEMEX = "Perfecto, trabajador o pensionado de PEMEX puede solicitar un crédito personalizado y sin comisiones iniciales.";
-  const MENSAJE_SOY_SNT29 = "Perfecto, trabajador del SNTE 29 puede solicitar un crédito personalizado y sin comisiones iniciales.";
-  const MENSAJE_SOY_NINGUNO = "Unicamente prestamos a IMSS, PEMEX Y SNTE 29, si trabajas en otra empresa o eres independiente déjanos tus datos y veremos la forma de ayudarte";
+  const MENSAJE_SOY_IMSS = "Perfecto, por ser Activo IMSS tiene derecho a su crédito personalizado y sin comisiones iniciales. ";
+  const MENSAJE_SOY_SEP = "Perfecto, por ser Trabajador SEP tiene derecho a su crédito personalizado y sin comisiones iniciales. ";
+  const MENSAJE_SOY_JUBILADO = "Perfecto, por ser Jubilado o Pensionado IMSS tiene derecho a su crédito o podemos mejorar su crédito actual";
+  const MENSAJE_SOY_NINGUNO = "Unicamente prestamos a IMSS y SEP, si trabajas en otra empresa o eres independiente déjanos tus datos y veremos la forma de ayudarte";
   const MENSAJE_ESCRIBA = "Escriba los datos que le solicitamos y en breve se contactará un agente especializado. ";
 
   const ESCRIBE_NUMERO_IMSS = "Escriba su numero de seguro social (En caso de no contar con el escriba: “x”)";
-  const ADJUNTA_TRILLAS = "Si cuenta con las ultimas trillas de pago envíe una foto, si no omita este paso.";
-  const ADJUNTA_TALONES = "Si cuenta con los últimos talones de pago envíe una foto, si no omita este paso.";
+  const ADJUNTA_TALONES = "Si cuenta con los últimos talones de pago envíe una foto, si no omita este paso. ";
   const MENSAJE_GRACIAS3 = "Muchas gracias.";
-  const MENSAJE_DESPEDIDA = "Perfecto. Tiene asignado a su asesor Cesar WhatsApp: 993 398 5860";
+  const MENSAJE_DESPEDIDA = "Perfecto. Tiene asignado a su asesor Viki Najera Frasoso WhatsApp: 6182101354 ";
+  const EXPLICAR_SERVICIO = "Credifintech Durango se enfoca en apoyar a todos los trabajadores SEP 12 e IMSS. Ofreciéndoles crédito de manera rápida y sencilla.
+";
 }
