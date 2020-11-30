@@ -104,10 +104,12 @@ class SolicitarDatosConversation extends Conversation{
           "telefono"=>$p->telefono,
           "numeroIMSS"=>$p->convenio,
           "dependencia"=>$sv,
-          "imagen"=>""
-        );
+          "imagen"=>"",
+      "sucursal"=>"DURANGO"
+    );
 
-        $contact_json = json_encode($contact_json);
+
+  $this->enviarASIVI($contact_json);
         //$this->say('json.'.$contact_json);
       }
     });
@@ -139,10 +141,12 @@ class SolicitarDatosConversation extends Conversation{
         "telefono"=>$p->telefono,
         "numeroIMSS"=>"$p->convenio",
         "dependencia"=>$sv,
-        "imagen"=>$rutaImagenes
-      );
+        "imagen"=>$rutaImagenes,
+      "sucursal"=>"DURANGO"
+    );
 
-      $contact_json = json_encode($contact_json);
+
+  $this->enviarASIVI($contact_json);
       $this-> cierre();
       //$this->say('json '.$contact_json);
       //$this->say('Perfecto, te contactara un asesor para darte a conocer los beneficios que tenemos para ti. ' );
@@ -166,10 +170,12 @@ class SolicitarDatosConversation extends Conversation{
       "telefono"=>$p->telefono,
       "numeroIMSS"=>$p->convenio,
       "dependencia"=>$sv,
-      "imagen"=>""
+      "imagen"=>"",
+      "sucursal"=>"DURANGO"
     );
 
-    $contact_json = json_encode($contact_json);
+
+  $this->enviarASIVI($contact_json);
     $this-> cierre();
     //$this->say('json.'.$contact_json);
     //$output = curl_wrap("contacts", $contact_json, "POST", "application/json");
@@ -223,30 +229,32 @@ class SolicitarDatosConversation extends Conversation{
     $this -> askInformacion();
   }
 
-  public function enviarDatosSivi($p, $sv)
-  {
-    $contact_json =array(
-      "nombre"=>$p->nombre,
-      "apeidos"=>$p->apellido,
-      "telefono"=>$p->telefono,
-      "numeroIMSS"=>$p->convenio,
-      "dependencia"=>$sv,
-      "imagen"=>""
-    );
+  public function enviarASIVI($data){
+	echo $data;
+  //API URL
+  $url = 'http://creditech.com.mx/SIVI/recepcionSolicitudRS.php?token=AIzaSyDFnRNVfvZM7ibHSMLi6FYnZ56H9MTQ02s';
 
-    $contact_json = json_encode($contact_json);
-    $options = array(
-      'http' => array(
-        'method'  => 'POST',
-        'content' => json_encode( $contact_json ),
-        'header'=>  "Content-Type: application/json\r\n" .
-                    "Accept: application/json\r\n"
-        )
-    );
+  //create a new cURL resource
+  $ch = curl_init($url);
 
-    $context  = stream_context_create( $options );
-    $result = file_get_contents( $url, false, $context );
-    $response = json_decode( $result );
-  }
+  $payload = json_encode($data);
+
+  //attach encoded JSON string to the POST fields
+  curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+
+  //set the content type to application/json
+  curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+
+  //return response instead of outputting
+  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+  //execute the POST request
+  $result = curl_exec($ch);
+
+  //close cURL resource
+  curl_close($ch);
+  echo $result;
+  $this->say($result);
+}
 
 }
