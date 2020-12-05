@@ -68,14 +68,13 @@ $doctrineCacheDriver = new FilesystemCache(__DIR__);
 $botman = BotManFactory::create($config, new DoctrineCache($doctrineCacheDriver));
 
 $botman->hears('^(?!.*\basesor|ASESOR|Asesor\b).*$', function (BotMan $bot) {
-  $nombre = $bot->getUser()->getFirstName();
+  /*$nombre = $bot->getUser()->getFirstName();
   $incomingMessageText = $bot->getMessage()->getText();
-
-  $nombre = $bot->getUser()->getFirstName();
-  $bot -> reply("Mucho gusto  $nombre");
+  $nombre = $bot->getUser()->getFirstName();*/
+  $bot -> reply("Mucho gusto");
   $bot -> reply(Constantes::EXPLICAR_SERVICIO);
   $bot->reply("Para regresar a este menú, escriba la palabra 'menu' en cualquier parte de la conversación");
-  $bot -> startConversation(new MenuConversation($nombre));
+  $bot -> startConversation(new MenuConversation(""));
 });
 
 
