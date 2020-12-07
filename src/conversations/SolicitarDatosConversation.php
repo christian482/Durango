@@ -98,21 +98,26 @@ class SolicitarDatosConversation extends Conversation{
             $this->askFoto($p, $sv);
       }else if($sv=='Ninguno'){
         $this->say(Constantes::MENSAJE_GRACIAS3);
-        $contact_json =array(
-          "nombre"=>$p->nombre,
-          "apeidos"=>$p->apellido,
-          "telefono"=>$p->telefono,
-          "numeroIMSS"=>$p->convenio,
-          "dependencia"=>$sv,
-          "imagen"=>"",
-          "sucursal"=>"DURANGO"
-        );
-
-
+          $this->say("a");
+          $contact_json = $this->armarStringJson($contact_json);
+          $this->say("b ".$contact_json);
           $this->enviarASIVI($contact_json);
           //$this->say('json.'.$contact_json);
       }
     });
+  }
+
+  public function armarStringJson($p, $sv) {
+    $contact_json =array(
+      "nombre"=>$p->nombre,
+      "apeidos"=>$p->apellido,
+      "telefono"=>$p->telefono,
+      "numeroIMSS"=>$p->convenio,
+      "dependencia"=>$sv,
+      "imagen"=>"",
+      "sucursal"=>"DURANGO"
+    );
+    return $contact_json;
   }
 
   public function askNumeroIMSS($p, $sv){
