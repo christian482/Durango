@@ -99,22 +99,22 @@ class SolicitarDatosConversation extends Conversation{
       }else if($sv=='Ninguno'){
         $this->say(Constantes::MENSAJE_GRACIAS3);
           $this->say("a");
-          $contact_json = $this->armarStringJson($contact_json);
-          $this->say("b ".$contact_json);
+          $contact_json = $this->armarStringJson($p, $sv,"");
+
           $this->enviarASIVI($contact_json);
           //$this->say('json.'.$contact_json);
       }
     });
   }
 
-  public function armarStringJson($p, $sv) {
+  public function armarStringJson($p, $sv,$rutaImagenes)  {
     $contact_json =array(
       "nombre"=>$p->nombre,
       "apeidos"=>$p->apellido,
       "telefono"=>$p->telefono,
       "numeroIMSS"=>$p->convenio,
       "dependencia"=>$sv,
-      "imagen"=>"",
+      "imagen"=>$rutaImagenes,
       "sucursal"=>"DURANGO"
     );
     return $contact_json;
@@ -144,18 +144,8 @@ class SolicitarDatosConversation extends Conversation{
               if ($answer->getValue() === 'si') {
                   $this->askImagenesTalones($p, $sv);
               } else {
-                $contact_json =array(
-                  "nombre"=>$p->nombre,
-                  "apeidos"=>$p->apellido,
-                  "telefono"=>$p->telefono,
-                  "numeroIMSS"=>"$p->convenio",
-                  "dependencia"=>$sv,
-                  "imagen"=>"",
-                  "sucursal"=>"TLANEPANTLA"
-                );
-
-
-              $this->enviarASIVI($contact_json);
+                $contact_json = $this->armarStringJson($p, $sv,"");
+                $this->enviarASIVI($contact_json);
                 $this-> cierre();
               }
           }
@@ -173,15 +163,7 @@ class SolicitarDatosConversation extends Conversation{
 
       }
       $rutaImagenes = str_replace("\/","/",$rutaImagenes);
-      $contact_json =array(
-        "nombre"=>$p->nombre,
-        "apeidos"=>$p->apellido,
-        "telefono"=>$p->telefono,
-        "numeroIMSS"=>$p->convenio,
-        "dependencia"=>$sv,
-        "imagen"=>$rutaImagenes,
-        "sucursal"=>"DURANGO"
-      );
+      $contact_json = $this->armarStringJson($p, $sv,$rutaImagenes);
       $this->enviarASIVI($contact_json);
       $this-> cierre();
     });
@@ -198,17 +180,7 @@ class SolicitarDatosConversation extends Conversation{
 
 
     ////////////////ESTA PRTE ES PARA MOSTRAR MENSAJE FINAL AL USUARIO Y DESPUES ENVIAR DATOS A CRM
-    $contact_json =array(
-      "nombre"=>$p->nombre,
-      "apeidos"=>$p->apellido,
-      "telefono"=>$p->telefono,
-      "numeroIMSS"=>$p->convenio,
-      "dependencia"=>$sv,
-      "imagen"=>"",
-      "sucursal"=>"DURANGO"
-    );
-
-
+    $contact_json = $this->armarStringJson($p, $sv,"");
     $this->enviarASIVI($contact_json);
     $this-> cierre();
   }
@@ -255,31 +227,31 @@ class SolicitarDatosConversation extends Conversation{
   }
 
   public function enviarASIVI($data){
-	echo $data;
-  //API URL
-  $url = 'http://creditech.com.mx/SIVI/recepcionSolicitudRS.php?token=AIzaSyDFnRNVfvZM7ibHSMLi6FYnZ56H9MTQ02s';
+  	echo $data;
+    //API URL
+    $url = 'http://creditech.com.mx/SIVI/recepcionSolicitudRS.php?token=AIzaSyDFnRNVfvZM7ibHSMLi6FYnZ56H9MTQ02s';
 
-  //create a new cURL resource
-  $ch = curl_init($url);
+    //create a new cURL resource
+    $ch = curl_init($url);
 
-  $payload = json_encode($data);
+    $payload = json_encode($data);
 
-  //attach encoded JSON string to the POST fields
-  curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+    //attach encoded JSON string to the POST fields
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
 
-  //set the content type to application/json
-  curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+    //set the content type to application/json
+    curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
 
-  //return response instead of outputting
-  curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    //return response instead of outputting
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
-  //execute the POST request
-  $result = curl_exec($ch);
+    //execute the POST request
+    $result = curl_exec($ch);
 
-  //close cURL resource
-  curl_close($ch);
-  echo $result;
-  $this->say($result);
-}
+    //close cURL resource
+    curl_close($ch);
+    echo $result;
+    $this->say($result);
+  }
 
 }
