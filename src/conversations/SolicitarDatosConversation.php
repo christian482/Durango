@@ -93,9 +93,9 @@ class SolicitarDatosConversation extends Conversation{
       if($sv=='IMSS'){
           $this->askNumeroIMSS($p, $sv);
       }else if($sv=='SEP'){
-            $this->askImagenes($p, $sv);
+            $this->askFoto($p, $sv);
       }else if($sv=='JUBILADO'){
-            $this->askImagenes($p, $sv);
+            $this->askFoto($p, $sv);
       }else if($sv=='Ninguno'){
         $this->say(Constantes::MENSAJE_GRACIAS3);
         $contact_json =array(
@@ -105,12 +105,12 @@ class SolicitarDatosConversation extends Conversation{
           "numeroIMSS"=>$p->convenio,
           "dependencia"=>$sv,
           "imagen"=>"",
-      "sucursal"=>"DURANGO"
-    );
+          "sucursal"=>"DURANGO"
+        );
 
 
-  $this->enviarASIVI($contact_json);
-        //$this->say('json.'.$contact_json);
+          $this->enviarASIVI($contact_json);
+          //$this->say('json.'.$contact_json);
       }
     });
   }
@@ -123,8 +123,42 @@ class SolicitarDatosConversation extends Conversation{
     });
   }
 
-  public function askImagenes($p, $sv) {
-    $this->askForImages(Constantes::ADJUNTA_TALONES, function ($images) use ($p, $sv) {
+  public function askFoto($p, $sv)
+  {
+
+      $question = Question::create(Constantes::ADJUNTA_TALONES)
+          ->fallback('Unable to ask question')
+          ->callbackId('ask_reason')
+          ->addButtons([
+              Button::create('Si')->value('si'),
+              Button::create('Omitir')->value('no'),
+          ]);
+
+      return $this->ask($question, function (Answer $answer) use ($p, $sv){
+          if ($answer->isInteractiveMessageReply()) {
+              if ($answer->getValue() === 'si') {
+                  $this->askImagenesTalones($p, $sv);
+              } else {
+                $contact_json =array(
+                  "nombre"=>$p->nombre,
+                  "apeidos"=>$p->apellido,
+                  "telefono"=>$p->telefono,
+                  "numeroIMSS"=>"$p->convenio",
+                  "dependencia"=>$sv,
+                  "imagen"=>"",
+                  "sucursal"=>"TLANEPANTLA"
+                );
+
+
+              $this->enviarASIVI($contact_json);
+                $this-> cierre();
+              }
+          }
+      });
+  }
+
+  public function askImagenesTalones($p, $sv) {
+    $this->askForImages("Favor de cargar tu Talon de Pago", function ($images) use ($p, $sv) {
       $p->identificacion = $images;
       // Primer guardado de información
       $rutaImagenes ="";
@@ -134,22 +168,17 @@ class SolicitarDatosConversation extends Conversation{
 
       }
       $rutaImagenes = str_replace("\/","/",$rutaImagenes);
-      //$this->say('$rutaImagenes '.$rutaImagenes);
       $contact_json =array(
         "nombre"=>$p->nombre,
         "apeidos"=>$p->apellido,
         "telefono"=>$p->telefono,
-        "numeroIMSS"=>"$p->convenio",
+        "numeroIMSS"=>$p->convenio,
         "dependencia"=>$sv,
         "imagen"=>$rutaImagenes,
-      "sucursal"=>"DURANGO"
-    );
-
-
-  $this->enviarASIVI($contact_json);
+        "sucursal"=>"DURANGO"
+      );
+      $this->enviarASIVI($contact_json);
       $this-> cierre();
-      //$this->say('json '.$contact_json);
-      //$this->say('Perfecto, te contactara un asesor para darte a conocer los beneficios que tenemos para ti. ' );
     });
   }
 
@@ -175,17 +204,8 @@ class SolicitarDatosConversation extends Conversation{
     );
 
 
-  $this->enviarASIVI($contact_json);
+    $this->enviarASIVI($contact_json);
     $this-> cierre();
-    //$this->say('json.'.$contact_json);
-    //$output = curl_wrap("contacts", $contact_json, "POST", "application/json");
-
-    //$fromCRM = curl_wrap("contacts/search/email/".$p->email, null, "GET", "application/json");
-    //$fromCRMarr = json_decode($fromCRM, true, 512, JSON_BIGINT_AS_STRING);
-    //$id = $fromCRMarr["id"];
-
-    //$p->id = $id;
-    //$this->enviarASharSpring($p, $sv,'');
   }
 
 
