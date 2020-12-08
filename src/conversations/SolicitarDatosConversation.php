@@ -98,11 +98,9 @@ class SolicitarDatosConversation extends Conversation{
             $this->askFoto($p, $sv);
       }else if($sv=='Ninguno'){
         $this->say(Constantes::MENSAJE_GRACIAS3);
-          $this->say("a");
-          $contact_json = $this->armarStringJson($p, $sv,"");
 
+          $contact_json = $this->armarStringJson($p, $sv,"");
           $this->enviarASIVI($contact_json);
-          //$this->say('json.'.$contact_json);
       }
     });
   }
