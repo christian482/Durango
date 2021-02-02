@@ -99,14 +99,21 @@ class SolicitarDatosConversation extends Conversation{
       $email = $response->getText();
       $p->email = $email;
       if($sv=='Ninguno'){
-          $this->say(Constantes::MENSAJE_DESPEDIDA);
-          $contact_json = $this->armarStringJson($p, $sv,"");
-          $this->enviarASIVI($contact_json);
+          $this->askTrabajo($p, $sv);
       }else {
         $this->askNumeroIMSSMatricula($p, $sv);
       }
     });
   }
+
+  public function askTrabajo($p, $sv){
+      $this -> ask(Constantes::ESCRIBRE_DONDE_TRABAJAS, function(Answer $response) use ($p, $sv){
+      $convenio = $response->getText();
+      $p->convenio = $convenio;
+      $this-> enviarDatosSinFoto($p, $sv);
+    });
+  }
+
 
   public function armarStringJson($p, $sv,$rutaImagenes)  {
     $contact_json =array(
@@ -122,10 +129,10 @@ class SolicitarDatosConversation extends Conversation{
   }
 
   public function askNumeroIMSSMatricula($p, $sv){
-      if($sv=='IMSS'){
-          $mensajeMostrar = Constantes::ESCRIBE_NUMERO_IMSS;
-      }else if($sv=='Pensionado'){
+      if($sv=='Pensionado'){
           $mensajeMostrar = Constantes::ESCRIBE_NUMERO_MATRICULA;
+      }else{
+          $mensajeMostrar = Constantes::ESCRIBE_NUMERO_IMSS;
       }
       $this -> ask($mensajeMostrar, function(Answer $response) use ($p, $sv){
       $numIMSS = $response->getText();

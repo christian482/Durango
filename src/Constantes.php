@@ -75,7 +75,7 @@ class Constantes {
   const SELECCIONE_OPCION = "Seleccione una opción:";
   const PREGUNTAR_TE_URGE_UN_PRESTAMO ="¿Te urge un préstamo? Solo sigue los siguientes pasos para que te contactemos. ";
   const PREGUNTAR_CONVENIO ="Selecciona uno de los siguientes convenios.";
-  const ESCRIBRE_DONDE_TRABAJAS = "Escribe donde trabajas:";
+  const ESCRIBRE_DONDE_TRABAJAS = "¿En dónde trabaja? ";
 
 
   const MENSAJE_SOY_IMSS = "Perfecto, por ser Personal Activo del IMSS tiene derecho a su credito personalizado.";
@@ -86,7 +86,7 @@ class Constantes {
 
   const ESCRIBE_NUMERO_IMSS = "Escriba su numero de seguro social (En caso de no contar con el escriba: “x”)";
   const ESCRIBE_NUMERO_MATRICULA = "Escriba su matricula (En caso de no contar con el escriba: “x”)";
-  const ADJUNTA_TALONES = "Si cuenta con los últimos talones de pago envíe una foto, si no omita este paso. ";  
+  const ADJUNTA_TALONES = "Si cuenta con los últimos talones de pago envíe una foto, si no omita este paso. ";
   const MENSAJE_DESPEDIDA = "Excelente. Si tiene alguna duda mande un WhatsApp al Director Erick Maldonado Acosta y con Gusto le Atendera Tel: 4811462763";
   const EXPLICAR_SERVICIO = "Credifintech se enfoca en apoyar a todos los Jubilados,Pensionados y Activos del IMSS asi como de Otras Dependencias de Gobierno Federales y Estatales con una Amplia Gama de Servicios Financieros Profesionles.";
 }
