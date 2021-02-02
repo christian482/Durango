@@ -71,7 +71,7 @@ $botman->hears('^(?!.*\basesor|ASESOR|Asesor\b).*$', function (BotMan $bot) {
   /*$nombre = $bot->getUser()->getFirstName();
   $incomingMessageText = $bot->getMessage()->getText();
   $nombre = $bot->getUser()->getFirstName();*/
-  $bot -> reply("Mucho gusto");
+  $bot -> reply("Bienvenido a Credifintech, es un Placer Atenderle.");
   $bot -> reply(Constantes::EXPLICAR_SERVICIO);
   $bot->reply("Para regresar a este menú, escriba la palabra 'menu' en cualquier parte de la conversación");
   $bot -> startConversation(new MenuConversation(""));

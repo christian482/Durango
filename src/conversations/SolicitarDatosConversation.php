@@ -56,8 +56,8 @@ class SolicitarDatosConversation extends Conversation{
             if($sv=='IMSS'){
                 $this->say(Constantes::MENSAJE_SOY_IMSS);
                 $this->say(Constantes::MENSAJE_ESCRIBA);
-            }else if($sv=='SEP'){
-                  $this->say(Constantes::MENSAJE_SOY_SEP);
+            }else if($sv=='Pensionado'){
+                  $this->say(Constantes::MENSAJE_SOY_PENSIONADO);
                   $this->say(Constantes::MENSAJE_ESCRIBA);
             }else if($sv=='JUBILADO'){
                   $this->say(Constantes::MENSAJE_SOY_JUBILADO);
@@ -87,20 +87,23 @@ class SolicitarDatosConversation extends Conversation{
   }
 
   public function askTelefono($p, $sv){
-    $this -> ask(Constantes::PEDIR_TELEFONO, function(Answer $response) use ($p, $sv){
+      $this -> ask(Constantes::PEDIR_TELEFONO, function(Answer $response) use ($p, $sv){
       $telefono = $response->getText();
       $p->telefono = $telefono;
-      if($sv=='IMSS'){
-          $this->askNumeroIMSS($p, $sv);
-      }else if($sv=='SEP'){
-            $this->askFoto($p, $sv);
-      }else if($sv=='JUBILADO'){
-            $this->askFoto($p, $sv);
-      }else if($sv=='Ninguno'){
-        $this->say(Constantes::MENSAJE_GRACIAS3);
+      $this-> askCorreo($p, $sv);
+    });
+  }
 
+  public function askCorreo($p, $sv){
+    $this -> ask(Constantes::PEDIR_EMAIL, function(Answer $response) use ($p, $sv){
+      $email = $response->getText();
+      $p->email = $email;
+      if($sv=='Ninguno'){
+          $this->say(Constantes::MENSAJE_DESPEDIDA);
           $contact_json = $this->armarStringJson($p, $sv,"");
           $this->enviarASIVI($contact_json);
+      }else {
+        $this->askNumeroIMSSMatricula($p, $sv);
       }
     });
   }
@@ -118,8 +121,13 @@ class SolicitarDatosConversation extends Conversation{
     return $contact_json;
   }
 
-  public function askNumeroIMSS($p, $sv){
-    $this -> ask(Constantes::ESCRIBE_NUMERO_IMSS, function(Answer $response) use ($p, $sv){
+  public function askNumeroIMSSMatricula($p, $sv){
+      if($sv=='IMSS'){
+          $mensajeMostrar = Constantes::ESCRIBE_NUMERO_IMSS;
+      }else if($sv=='Pensionado'){
+          $mensajeMostrar = Constantes::ESCRIBE_NUMERO_MATRICULA;
+      }
+      $this -> ask($mensajeMostrar, function(Answer $response) use ($p, $sv){
       $numIMSS = $response->getText();
       $p->convenio = $numIMSS;
       $this-> enviarDatosSinFoto($p, $sv);

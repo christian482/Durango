@@ -78,16 +78,15 @@ class Constantes {
   const ESCRIBRE_DONDE_TRABAJAS = "Escribe donde trabajas:";
 
 
-  const MENSAJE_SOY_IMSS = "Perfecto, por ser Activo IMSS tiene derecho a su crédito personalizado y sin comisiones iniciales. ";
-  const MENSAJE_SOY_SEP = "Perfecto, por ser Trabajador SEP tiene derecho a su crédito personalizado y sin comisiones iniciales. ";
-  const MENSAJE_SOY_JUBILADO = "Perfecto, por ser Jubilado o Pensionado IMSS tiene derecho a su crédito o podemos mejorar su crédito actual";
-  const MENSAJE_SOY_NINGUNO = "Unicamente prestamos a IMSS y SEP, si trabajas en otra empresa o eres independiente déjanos tus datos y veremos la forma de ayudarte";
+  const MENSAJE_SOY_IMSS = "Perfecto, por ser Personal Activo del IMSS tiene derecho a su credito personalizado.";
+  const MENSAJE_SOY_PENSIONADO = "Perfecto, por ser Pensionado Ley tiene derecho a su crédito personalizado. ";
+  const MENSAJE_SOY_JUBILADO = "Perfecto, por ser Jubilado IMSS tiene derecho a su crédito personalizado.";
+  const MENSAJE_SOY_NINGUNO = "Otorgamos Créditos a otros Sectores como ( SEP, UNAM, PEMEX, CFE, SNTE, ISSSTE, GOBIERNO FEDERAL y DEL ESTADO) Entre Otros.";
   const MENSAJE_ESCRIBA = "Escriba los datos que le solicitamos y en breve se contactará un agente especializado. ";
 
   const ESCRIBE_NUMERO_IMSS = "Escriba su numero de seguro social (En caso de no contar con el escriba: “x”)";
-  const ADJUNTA_TALONES = "Si cuenta con los últimos talones de pago envíe una foto, si no omita este paso. ";
-  const MENSAJE_GRACIAS3 = "Muchas gracias.";
-  const MENSAJE_DESPEDIDA = "Perfecto. Tiene asignado a su asesor Viki Najera Frasoso WhatsApp: 6182101354 ";
-  const EXPLICAR_SERVICIO = "Credifintech Durango se enfoca en apoyar a todos los trabajadores SEP 12 e IMSS. Ofreciéndoles crédito de manera rápida y sencilla.
-";
+  const ESCRIBE_NUMERO_MATRICULA = "Escriba su matricula (En caso de no contar con el escriba: “x”)";
+  const ADJUNTA_TALONES = "Si cuenta con los últimos talones de pago envíe una foto, si no omita este paso. ";  
+  const MENSAJE_DESPEDIDA = "Excelente. Si tiene alguna duda mande un WhatsApp al Director Erick Maldonado Acosta y con Gusto le Atendera Tel: 4811462763";
+  const EXPLICAR_SERVICIO = "Credifintech se enfoca en apoyar a todos los Jubilados,Pensionados y Activos del IMSS asi como de Otras Dependencias de Gobierno Federales y Estatales con una Amplia Gama de Servicios Financieros Profesionles.";
 }
